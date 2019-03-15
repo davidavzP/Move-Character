@@ -1,0 +1,26 @@
+[package]
+name = "bare_metal_1"
+version = "0.1.0"
+authors = ["Gabriel Ferrer <ferrer@hendrix.edu>"]
+edition = "2018"
+
+[dependencies]
+bootloader = "0.3.12"
+volatile = "0.2.3"
+spin = "0.4.9"
+x86_64 = "0.4.2"
+pic8259_simple = "0.1.1"
+pc-keyboard = "0.3.1"
+
+[dependencies.lazy_static]
+version = "1.0"
+features = ["spin_no_std"]
+
+[package.metadata.bootimage]
+default-target = "x86_64-bare_metal_1.json"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
