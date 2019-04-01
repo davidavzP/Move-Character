@@ -8,21 +8,21 @@ use bare_metal_1::interrupts::PICS;
 use bare_metal_1::move_char;
 static HELLO: &[u8] = b"Hello World!";
 
+
+
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-//    let vga_buffer = 0xb8000 as *mut u8;
-//    let O: &[u8] = b"0";
-//
-//
-//        unsafe {
-//            *vga_buffer.offset( 300 as isize * 2) = *O.get(0).unwrap();
-//            *vga_buffer.offset(300 as isize * 2 + 1) = 0xb;
-//        }
 
     //puts a char to the middle of the screen
 
-
-    move_char::MOVER.lock().place_char(b'0');
+    for _i in 0..5{
+    println!("");
+    println!("None of them noticed a large, tawny owl flutter past the window. ");
+    for _i in 0..4{
+        println!("");
+    }
+    println!("None of them noticed a large, tawny owl flutter past the window. ");
+        }
     println!("Hello world!");
     println!("USE THE W, S, A, D, keys to move the zero around the screen :)");
 
@@ -33,6 +33,7 @@ pub extern "C" fn _start() -> ! {
     x86_64::instructions::interrupts::enable();
 
     println!("It did not crash!");
+    move_char::MOVER.lock().place_moving_char();
     loop {}
 }
 

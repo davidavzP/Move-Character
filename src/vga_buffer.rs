@@ -65,6 +65,7 @@ impl Writer {
     pub fn write_byte(&mut self, byte: u8) {
         match byte {
             b'\n' => self.new_line(),
+
             byte => {
                 if self.column_position >= BUFFER_WIDTH {
                     self.new_line()
@@ -73,7 +74,12 @@ impl Writer {
                 let row = BUFFER_HEIGHT - 1;
                 let col = self.column_position;
 
-                let color_code = self.color_code;
+
+                let mut color_code = self.color_code;
+                if byte == b' '{
+                    color_code = ColorCode::new(Color::Black, Color::Black);
+                }
+
                 self.buffer.chars[row][col].write(ScreenChar {
                     ascii_character: byte,
                     color_code,
@@ -106,7 +112,7 @@ impl Writer {
     fn clear_row(&mut self, row: usize) {
         let blank = ScreenChar {
             ascii_character: b' ',
-            color_code: self.color_code,
+            color_code: ColorCode::new(Color::Black, Color::Black),
         };
         for col in 0..BUFFER_WIDTH {
             self.buffer.chars[row][col].write(blank);

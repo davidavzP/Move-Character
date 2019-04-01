@@ -79,7 +79,7 @@ extern "x86-interrupt" fn keyboard_interrupt_handler(_stack_frame: &mut Exceptio
     if let Ok(Some(key_event)) = keyboard.add_byte(scancode) {
         if let Some(key) = keyboard.process_keyevent(key_event) {
             match key {
-                DecodedKey::Unicode(character) => move_char::MOVER.lock().write_string(character.encode_utf8(&mut [10])),
+                DecodedKey::Unicode(character) => move_char::MOVER.lock().write_string(character.encode_utf8(&mut [0])),
                 DecodedKey::RawKey(key) => print!("{:?}", key),
 //                DecodedKey::Unicode(character) => print!("{}", character),
 //                DecodedKey::RawKey(key) => print!("{:?}", key),
